@@ -52,6 +52,9 @@ $config = [
             'enableDefaultLanguageUrlCode' => true,
             'rules' => [
             ],
+//            'ignoreLanguageUrlPatterns' => [
+//                '#^img/#' => '#^img/#',
+//            ],
         ],
         'i18n' => [
             'translations' => [

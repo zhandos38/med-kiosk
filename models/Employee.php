@@ -20,10 +20,13 @@ use Yii;
  * @property string $thursday [varchar(100)]
  * @property string $friday [varchar(100)]
  * @property string $saturday [varchar(100)]
+ * @property mixed $position
  * @property string $sunday [varchar(100)]
  */
 class Employee extends \yii\db\ActiveRecord
 {
+    public $imageFile;
+
     public function behaviors()
     {
         return [
@@ -49,7 +52,8 @@ class Employee extends \yii\db\ActiveRecord
         return [
             [['position_id', 'created_at', 'updated_at'], 'integer'],
             [['full_name', 'cabinet', 'image'], 'string', 'max' => 255],
-            [['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'], 'string']
+            [['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'], 'string'],
+            [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg']
         ];
     }
 
@@ -71,12 +75,30 @@ class Employee extends \yii\db\ActiveRecord
             'thursday' => 'Четверг',
             'friday' => 'Пятница',
             'saturday' => 'Субботка',
-            'sunday' => 'Воскресенье'
+            'sunday' => 'Воскресенье',
+            'imageFile' => 'Рисунок'
         ];
     }
 
     public function getPosition()
     {
         return $this->hasOne(Position::className(), ['id' => 'position_id']);
+    }
+
+    public function upload()
+    {
+        if ($this->validate()) {
+            $this->imageFile->saveAs('img/employee/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function beforeSave($insert)
+    {
+        if (!empty($this->imageFile))
+            $this->image = $this->imageFile->baseName . '.' . $this->imageFile->extension;
+        return true;
     }
 }

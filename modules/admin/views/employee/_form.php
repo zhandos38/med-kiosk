@@ -14,14 +14,16 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'full_name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'position_id')->textInput() ?>
+    <?= $form->field($model, 'position_id')->dropDownList(\yii\helpers\ArrayHelper::map(\app\models\Position::find()->all(), 'id', 'name'), [
+        'prompt' => 'Выберите должность'
+    ]) ?>
 
     <?= $form->field($model, 'cabinet')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'imageFile')->fileInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('site', 'Save'), ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

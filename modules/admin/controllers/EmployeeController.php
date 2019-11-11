@@ -8,6 +8,7 @@ use app\modules\admin\models\EmployeeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * EmployeeController implements the CRUD actions for Employee model.
@@ -66,8 +67,12 @@ class EmployeeController extends Controller
     {
         $model = new Employee();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            if ($model->save() && $model->upload()) {
+                return $this->redirect(['index']);
+            }
+            return false;
         }
 
         return $this->render('create', [
@@ -86,8 +91,12 @@ class EmployeeController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            if ($model->save() && $model->upload()) {
+                return $this->redirect(['index']);
+            }
+            return false;
         }
 
         return $this->render('update', [
@@ -101,6 +110,8 @@ class EmployeeController extends Controller
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {
