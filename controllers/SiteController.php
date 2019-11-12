@@ -125,4 +125,114 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    /**
+     * Displays about page.
+     *
+     * @return string
+     */
+    public function actionSupport()
+    {
+        return $this->render('support');
+    }
+
+    /**
+     * Displays about page.
+     *
+     * @return string
+     */
+    public function actionOurServices()
+    {
+        return $this->render('our-services');
+    }
+
+    /**
+     * Displays about page.
+     *
+     * @return string
+     */
+    public function actionInsurance()
+    {
+        return $this->render('insurance');
+    }
+
+    /**
+     * Displays about page.
+     *
+     * @return string
+     */
+    public function actionGuarantee()
+    {
+        return $this->render('guarantee');
+    }
+
+    /**
+     * Displays about page.
+     *
+     * @return string
+     */
+    public function actionHealthCodex()
+    {
+        return $this->render('health-codex');
+    }
+
+    /**
+     * Displays about page.
+     *
+     * @return string
+     */
+    public function actionDisease()
+    {
+        return $this->render('disease');
+    }
+
+    /**
+     * Displays about page.
+     *
+     * @return string
+     */
+    public function actionAmbulance()
+    {
+        return $this->render('ambulance');
+    }
+
+    /**
+     * Displays about page.
+     *
+     * @return string
+     */
+    public function actionOrganization()
+    {
+        return $this->render('organization');
+    }
+
+    /**
+     * Displays about page.
+     *
+     * @return string
+     */
+    public function actionInspection()
+    {
+        return $this->render('inspection');
+    }
+
+    /**
+     * Displays about page.
+     *
+     * @return string
+     */
+    public function actionDirection()
+    {
+        return $this->render('direction');
+    }
+
+    /**
+     * Displays about page.
+     *
+     * @return string
+     */
+    public function actionMedicineHelp()
+    {
+        return $this->render('medicine-help');
+    }
 }

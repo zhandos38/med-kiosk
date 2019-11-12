@@ -18,7 +18,7 @@ class m191110_171356_add_position_id_column_to_employee_table extends Migration
             'fk-employee-position_id-position-id',
             $this->tableName,
             'position_id',
-            \app\models\Employee::tableName(),
+            \app\models\Position::tableName(),
             'id',
             'SET NULL'
         );

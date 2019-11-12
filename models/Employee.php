@@ -87,12 +87,10 @@ class Employee extends \yii\db\ActiveRecord
 
     public function upload()
     {
-        if ($this->validate()) {
+        if ($this->validate() && !empty($this->imageFile)) {
             $this->imageFile->saveAs('img/employee/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
-            return true;
-        } else {
-            return false;
         }
+        return true;
     }
 
     public function beforeSave($insert)
